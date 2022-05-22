@@ -80,7 +80,7 @@ func TestTransferTx(t *testing.T) {
 		require.NotEmpty(t, toAccount)
 
 		// check account' balance
-		fmt.Println(">>tx:", fromAccount.Balance, toAccount.Balance)
+		fmt.Println(">> tx:", fromAccount.Balance, toAccount.Balance)
 		require.Equal(t, account1.ID, fromAccount.ID)
 		diff1 := account1.Balance - fromAccount.Balance
 		diff2 := toAccount.Balance - account2.Balance
