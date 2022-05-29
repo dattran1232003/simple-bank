@@ -11,6 +11,7 @@ import (
 // Store providers all functions to execute db queries and transaction
 type Store interface {
 	Querier
+	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
 }
 
 // SQLStore providers all functions to execute SQL queries and transaction
