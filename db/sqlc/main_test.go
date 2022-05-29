@@ -6,12 +6,8 @@ import (
 	"os"
 	"testing"
 
+	"github.com/dattran1232003/simple-bank/util"
 	_ "github.com/lib/pq"
-)
-
-const (
-	dbDriver = "postgres"
-	dbSource = "postgresql://root:root@localhost:5432/simple_bank?sslmode=disable"
 )
 
 var testQueries *Queries
@@ -19,10 +15,17 @@ var testDB *sql.DB
 
 func TestMain(m *testing.M) {
 	var err error
-	testDB, err = sql.Open(dbDriver, dbSource)
+
+	config, err := util.LoadConfig("../../")
+	if err != nil {
+		log.Fatal("cannot load environment:", err)
+	}
+
+	testDB, err = sql.Open(config.DB_DRIVER, config.DB_SOURCE)
 	if err != nil {
 		log.Fatal("cannot connect to database:", err)
 	}
+
 	testQueries = New(testDB)
 	os.Exit(m.Run())
 }

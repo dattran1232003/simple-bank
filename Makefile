@@ -11,9 +11,6 @@ createdb:
 dropdb:
 	docker exec -it local-pg dropdb simple_bank
 
-test:
-	go test -v -cover ./...
-
 migrateup:
 	migrate -path db/migration -database "postgresql://root:root@localhost:5432/simple_bank?sslmode=disable" -verbose up
 
@@ -22,5 +19,11 @@ migratedown:
 
 sqlc:
 	sqlc generate
+
+test:
+	go test -v -cover ./...
+
+server:
+	go run .
 
 .PHONY: postgres createdb dropdb migrateup migratedown sqlc test
