@@ -50,7 +50,6 @@ func (server *Server) getAccount(ctx *gin.Context) {
 	}
 
 	account, err := server.store.GetAccount(ctx, params.ID)
-
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
@@ -61,7 +60,6 @@ func (server *Server) getAccount(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, account)
-
 }
 
 type ListAccountsRequest struct {
