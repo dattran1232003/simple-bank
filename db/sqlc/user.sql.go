@@ -21,8 +21,8 @@ VALUES ($1, $2, $3, $4) RETURNING username, hashed_password, full_name, email, c
 
 type CreateUserParams struct {
 	Username       string `json:"username"`
-	HashedPassword string `json:"hashedPassword"`
-	FullName       string `json:"fullName"`
+	HashedPassword string `json:"hashed_password"`
+	FullName       string `json:"full_name"`
 	Email          string `json:"email"`
 }
 
@@ -46,10 +46,7 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 }
 
 const getUser = `-- name: GetUser :one
-SELECT username, hashed_password, full_name, email, created_at, password_changed_at
-FROM users
-WHERE username = $1
-LIMIT 1
+SELECT username, hashed_password, full_name, email, created_at, password_changed_at FROM users WHERE username = $1 LIMIT 1
 `
 
 func (q *Queries) GetUser(ctx context.Context, username string) (User, error) {
