@@ -1,4 +1,5 @@
 postgres:
+	docker network create local-pg; \
 	docker run --name local-pg  -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -dp 5432:5432 --network=local-pg --restart=always -v local-pg:/var/lib/postgresql/data postgres:14-alpine
 
 postgres-admin:
