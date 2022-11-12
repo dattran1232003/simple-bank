@@ -1,9 +1,9 @@
 postgres:
-	docker network create local-pg; \
-	docker run --name local-pg  -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -dp 5432:5432 --network=local-pg --restart=always -v local-pg:/var/lib/postgresql/data postgres:14-alpine
+	docker network create bank-network; \
+	docker run --name  bank-network  -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -dp 5432:5432 --network=local-pg --restart=always -v local-pg:/var/lib/postgresql/data postgres:14-alpine
 
 postgres-admin:
-	docker run -dp 82:80 --name=local-pgadmin -v pgadmindata:/var/lib/pgadmin -e 'PGADMIN_DEFAULT_EMAIL=dattran1232003@gmail.com' -e 'PGADMIN_DEFAULT_PASSWORD=Datmaniac@1' --restart=always --network=local-pg dpage/pgadmin4
+	docker run -dp 82:80 --name=local-pgadmin -v pgadmindata:/var/lib/pgadmin -e 'PGADMIN_DEFAULT_EMAIL=dattran1232003@gmail.com' -e 'PGADMIN_DEFAULT_PASSWORD=Datmaniac@1' --restart=always --network=bank-network dpage/pgadmin4
 
 
 createdb:
